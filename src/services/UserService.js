@@ -3,8 +3,8 @@ const services = require('../util/service.js');
 
 console.log(`user-service: ${process.env.USER_SERVICE_URL}`);
 
-if (!process.env.USER_SERVICE_URL) {
-    process.env['USER_SERVICE_URL'] = '35.228.85.132';
+if (!process.env.USER_SERVICE_SERVICE_HOST) {
+    process.env['USER_SERVICE_SERVICE_HOST'] = '35.228.85.132';
 }
 
 module.exports = {
