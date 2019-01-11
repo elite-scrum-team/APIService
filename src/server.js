@@ -37,6 +37,12 @@ app.get('/', async (req, res) => {
     }); 
 });
 
+// send metrics 
+
+app.get('/metrics', async (req, res) => {
+    await res.set('Content-Type', client.register.contentType)
+    await res.end(client.register.metrics())
+})
 
 const port = process.env.port || 8080;
 
