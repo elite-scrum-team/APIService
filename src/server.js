@@ -5,6 +5,15 @@ const bodyParser = require('body-parser');
 // logging
 const morgan = require('morgan');
 
+// prometious logging
+const client = require('prom-client');
+
+const collectDefaultMetrics = client.collectDefaultMetrics;
+
+// Probe every 5th second.
+collectDefaultMetrics({ timeout: 5000 });
+
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -26,6 +35,6 @@ app.get('/', async (req, res) => {
 });
 
 
-const port = process.env.port | 80;
+const port = process.env.port || 8080;
 
 app.listen(port, () => console.log(`listening on port ${port}`));
