@@ -22,7 +22,6 @@ app.use(cors());
 app.use(morgan('dev'));
 
 // Adding cors middleware
-app.use(require('./middleware/cors.js'));
 
 app.use(require('./middleware/internal.js'));
 app.use(require('./middleware/authenticate.js'));
