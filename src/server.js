@@ -20,6 +20,9 @@ app.use(bodyParser.json());
 
 app.use(morgan('dev'));
 
+// Adding cors middleware
+app.use(require('./middleware/cors.js'));
+
 app.use(require('./middleware/internal.js'));
 app.use(require('./middleware/authenticate.js'));
 app.use(require('./middleware/user.js'));
