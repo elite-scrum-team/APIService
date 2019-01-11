@@ -19,7 +19,9 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
-app.use(morgan('dev'));
+app.use(morgan('dev', {
+    skip: (req, res) => req.path === '/metrics',
+}));
 
 // Adding cors middleware
 
