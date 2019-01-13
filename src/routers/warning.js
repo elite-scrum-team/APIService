@@ -11,7 +11,9 @@ router.post('/image', async (req, res) => {
 
 // get categories
 router.get('/category', async (req, res) => {
-    await res.send(await WarningService.category.retrive());
+    const r = await WarningService.category.retrive();
+    console.log(r);
+    await res.send(r);
 });
 
 // get warnings
