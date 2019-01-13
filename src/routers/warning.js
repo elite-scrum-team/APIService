@@ -23,4 +23,9 @@ router.post('/image', async (req, res) => {
     await res.send(await WarningService.image.create(req.body));
 });
 
+// get categories
+router.get('/category', async (req, res) => {
+    await res.send(await WarningService.category.retrive());
+});
+
 module.exports = router;
