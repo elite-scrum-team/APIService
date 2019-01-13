@@ -25,9 +25,7 @@ app.use(
 
 // Adding cors middleware
 
-app.use(require('./middleware/internal.js'));
 app.use(require('./middleware/authenticate.js'));
-app.use(require('./middleware/user.js'));
 
 // routers
 app.use('/api/v1/auth', require('./routers/auth'));
