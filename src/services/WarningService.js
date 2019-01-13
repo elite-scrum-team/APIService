@@ -1,23 +1,35 @@
+const services = require('../util/service.js');
+
+if (!process.env.WARNING_SERVICE_SERVICE_HOST) {
+    process.env['WARNING_SERVICE_SERVICE_HOST'] = '35.228.234.29';
+}
+
 module.exports = {
     warning: {
-        create(warning) {
-            return warning;
+        async create(warning, userId) {
+            return await services.fetch.post(
+                'warning',
+                'warning',
+                {},
+                warning,
+                '123'
+            );
         },
-        retrive(filter) {
-            return [];
+        async retrive(filter) {
+            return await services.fetch.get('warning', 'warning', {}, '123');
         },
-        retriveOne(filter) {
+        async retriveOne(filter) {
             return [];
         },
     },
     image: {
-        create(image) {
+        async create(image) {
             return image;
         },
     },
     category: {
-        retrive() {
-            return ['Hole in the road'];
+        async retrive() {
+            return await services.fetch.get('warning', 'category', {}, '123');
         },
     },
 };
