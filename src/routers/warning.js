@@ -18,4 +18,9 @@ router.post('/', async (req, res) => {
     return await WarningService.warning.create(req.body);
 });
 
+// create image
+router.post('/image', async (req, res) => {
+    return await WarningService.image.create(req.body);
+});
+
 module.exports = router;
