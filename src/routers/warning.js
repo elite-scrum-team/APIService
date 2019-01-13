@@ -18,16 +18,18 @@ router.get('/category', async (req, res) => {
 
 // get warnings
 router.get('/', async (req, res) => {
-    await res.send(await WarningService.warning.retrive(req.query));
+    await res.send(await WarningService.warning.retrive(req.query, req.userId));
 });
 
 router.get('/:id', async (req, res) => {
-    await res.send(await WarningService.warning.retriveOne(req.params.id));
+    await res.send(
+        await WarningService.warning.retriveOne(req.params.id, req.userId)
+    );
 });
 
 // create warning
 router.post('/', async (req, res) => {
-    const r = await WarningService.warning.create(req.body);
+    const r = await WarningService.warning.create(req.body, req.userId);
     await res.send(r.json());
 });
 

@@ -15,10 +15,10 @@ module.exports = {
                 '123'
             );
         },
-        async retrive(filter) {
-            return await services.fetch.get('warning', 'warning', {}, '123');
+        async retrive(filter, userId) {
+            return await services.fetch.get('warning', 'warning', {}, userId);
         },
-        async retriveOne(filter) {
+        async retriveOne(filter, userId) {
             return [];
         },
     },
@@ -28,12 +28,12 @@ module.exports = {
         },
     },
     category: {
-        async retrive() {
+        async retrive(userId) {
             const res = await services.fetch.get(
                 'warning',
                 'category',
                 {},
-                '123'
+                userId
             );
             return res;
         },
