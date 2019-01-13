@@ -1,7 +1,7 @@
 const services = require('../util/service.js');
 
 if (!process.env.WARNING_SERVICE_SERVICE_HOST) {
-    process.env['WARNING_SERVICE_SERVICE_HOST'] = '35.228.234.29';
+    process.env['WARNING_SERVICE_SERVICE_HOST'] = '35.228.80.86';
 }
 
 module.exports = {
@@ -29,7 +29,13 @@ module.exports = {
     },
     category: {
         async retrive() {
-            return await services.fetch.get('warning', 'category', {}, '123');
+            const res = await services.fetch.get(
+                'warning',
+                'category',
+                {},
+                '123'
+            );
+            return res;
         },
     },
 };

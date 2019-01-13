@@ -1,46 +1,50 @@
-
 const services = require('../util/service.js');
 
 console.log(`user-service: ${process.env.USER_SERVICE_SERVICE_HOST}`);
 
 if (!process.env.USER_SERVICE_SERVICE_HOST) {
-    process.env['USER_SERVICE_SERVICE_HOST'] = '35.228.85.132';
+    process.env['USER_SERVICE_SERVICE_HOST'] = '35.228.101.13';
 }
 
 module.exports = {
     async get(email) {
         try {
-            const res = await services.fetch('user', 'user',  { payload: { email: email, password: password } });
+            const res = await services.fetch('user', 'user', {
+                payload: { email: email, password: password },
+            });
             return await res.json();
-        } catch(err) {
+        } catch (err) {
             console.log(err);
             return {
-                error: 'Server error'
-            }
+                error: 'Server error',
+            };
         }
     },
     async token(email, password) {
         console.log('fetching...');
         try {
-            const res = await services.fetch('user', 'user/login',  { payload: { email: email, password: password } });
+            const res = await services.fetch('user', 'user/login', {
+                payload: { email: email, password: password },
+            });
             return await res.json();
-        } catch(err) {
+        } catch (err) {
             console.error(err);
             return {
                 error: 'Server error',
-            }
+            };
         }
     },
     async register(user) {
         try {
-            const res = await services.fetch('user', 'user/register', { payload: user });
+            const res = await services.fetch('user', 'user/register', {
+                payload: user,
+            });
             return await res.json();
-        } catch(err) {
+        } catch (err) {
             console.error(err);
             return {
                 error: 'Server error',
-            }
+            };
         }
-    }
-}
-
+    },
+};
