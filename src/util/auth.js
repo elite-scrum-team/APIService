@@ -4,9 +4,7 @@ const jwt = require('jsonwebtoken');
 module.exports = {
     async validate(token) {
         try {
-            const decoded = jwt.verify(token, 'secret');
-            console.log("DECODED: ", decoded);
-            return decoded;
+            return jwt.verify(token, 'secret');
         } catch(err) {
             return undefined;    
         }

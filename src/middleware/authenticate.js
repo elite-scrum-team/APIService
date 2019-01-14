@@ -18,8 +18,7 @@ module.exports = async (req, res, next) => {
         return;
     }
 
-    req.userId = await auth.validate(split[1]).id;
-    console.log("USERID IN MIDDLEWARE: ", req.userId);
-
+    req.userId = (await auth.validate(split[1])).id;
+   
     next();
 };
