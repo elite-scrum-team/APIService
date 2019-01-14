@@ -48,4 +48,16 @@ module.exports = {
             return res;
         },
     },
+    status: {
+        async create(statusData, userId) {
+            const res = await services.fetch.post(
+                'warning',
+                'status',
+                {},
+                statusData,
+                userId
+            );
+            return res;
+        }
+    }
 };

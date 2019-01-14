@@ -4,9 +4,15 @@ const WarningService = require('../services/WarningService');
 
 const router = express.Router();
 
+// create status
+router.post('/status', async (req, res) => {
+    const r = await WarningService.status.create(req.body, req.userId);
+    await res.send(await r.json(), r.status);
+});
+
 // create image
 router.post('/image', async (req, res) => {
-    const r = WarningService.category.retrive();
+    const r = WarningService.image.create(req.body);
     await res.send(r.json());
 });
 
