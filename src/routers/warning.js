@@ -6,6 +6,7 @@ const router = express.Router();
 
 // create status
 router.post('/status', async (req, res) => {
+    console.log("USER ID: " + req.userId);
     const r = await WarningService.status.create(req.body, req.userId);
     await res.send(await r.json(), r.status);
 });

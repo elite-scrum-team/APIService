@@ -12,7 +12,7 @@ module.exports = {
                 'warning',
                 {},
                 warning,
-                '123'
+                userId
             );
         },
         async retrive(filters, userId) {
@@ -20,6 +20,7 @@ module.exports = {
                 'warning',
                 'warning',
                 filters,
+                null,
                 userId
             );
         },
@@ -28,6 +29,7 @@ module.exports = {
                 'warning',
                 `warning/${id}`,
                 {},
+                null,
                 userId
             );
         },
@@ -43,6 +45,7 @@ module.exports = {
                 'warning',
                 'category',
                 {},
+                null,
                 userId
             );
             return res;
