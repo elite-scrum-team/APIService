@@ -10,12 +10,12 @@ module.exports = {
     async token(email, password) {
         return await services.fetch.post(
             'user',
-            'token',
+            'user/token',
             {},
             { email: email, password: password }
         );
     },
     async register(user) {
-        return await services.fetch.post('user', 'register', {}, user);
+        return await services.fetch.post('user', 'user/register', {}, user);
     },
 };
