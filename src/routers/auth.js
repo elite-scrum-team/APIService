@@ -6,12 +6,14 @@ const router = express.Router();
 
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
-    await res.send(await UserService.token(email, password));
+    const r = await UserService.token(email, password);
+    await res.send(await r.json());
 });
 
 router.post('/register', async (req, res) => {
     const user = req.body;
-    await res.send(await UserService.register(user));
+    const r = await UserService.register(user);
+    await res.send(r.json());
 });
 
 module.exports = router;
