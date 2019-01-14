@@ -15,7 +15,7 @@ module.exports = {
                 '123'
             );
         },
-        async retrive(filter, userId) {
+        async retrive(filters, userId) {
             return await services.fetch.get(
                 'warning',
                 'warning',
