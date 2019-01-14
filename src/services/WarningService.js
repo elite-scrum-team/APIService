@@ -16,10 +16,20 @@ module.exports = {
             );
         },
         async retrive(filter, userId) {
-            return await services.fetch.get('warning', 'warning', {}, userId);
+            return await services.fetch.get(
+                'warning',
+                'warning',
+                filters,
+                userId
+            );
         },
-        async retriveOne(filter, userId) {
-            return [];
+        async retriveOne(id, userId) {
+            return await services.fetch.get(
+                'warning',
+                `warning/${id}`,
+                {},
+                userId
+            );
         },
     },
     image: {
