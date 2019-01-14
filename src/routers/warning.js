@@ -18,7 +18,8 @@ router.get('/category', async (req, res) => {
 
 // get warnings
 router.get('/', async (req, res) => {
-    await res.send(await WarningService.warning.retrive(req.query, req.userId));
+    const r = await WarningService.warning.retrive(req.query, req.userId);
+    await res.send(r.json(), r.status);
 });
 
 router.get('/:id', async (req, res) => {
