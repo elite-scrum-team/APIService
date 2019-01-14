@@ -2,6 +2,7 @@ const auth = require('../util/auth');
 
 module.exports = async (req, res, next) => {
     const headers = req.header('Authorization');
+    console.log(headers);
 
     if (headers === undefined) {
         req.userId = null;
@@ -18,6 +19,7 @@ module.exports = async (req, res, next) => {
     }
 
     req.userId = await auth.validate(split[1]).id;
+    console.log("USERID IN MIDDLEWARE: ", req.userId);
 
     next();
 };
