@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+require('dotenv').config();
 
 // logging
 const morgan = require('morgan');
@@ -15,6 +16,7 @@ collectDefaultMetrics({ timeout: 5000 });
 
 const app = express();
 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 app.use(
