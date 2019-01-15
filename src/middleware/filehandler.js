@@ -1,34 +1,34 @@
 const multer = require('multer');
-const multerGoogleStorage = require('multer-google-storage');
+const multerGoogleStorage = require('@igorivaniuk/multer-google-storage');
 
-const upload = multer({
-    storage: multerGoogleStorage.storageEngine(),
+let upload = null;
 
-    /*  fileFilter: (req, file, cb) => {
-        console.log("Body: ", req.body);
-        console.log("File: ", req.file);
-        console.log("Files: ", req.files);
-        // reject a file
-        if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-            cb(null, true);
-        } else {
-            cb(null, false);
-        }
-    },
+try {
+    const storage = multerGoogleStorage.storageEngine();
 
-    filename: (req, file, cb) => {
-        let datenow = Date.now().toString();
-        cb(null, datenow + file.getOriginalFilename());
-    }, */
-});
+    const multerInit = multer({
+        storage,
 
-let storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-        cb(null, './');
-    },
-    filename: function(req, file, cb) {
-        cb(null, file.fieldname + ' - ' + Date.now());
-    },
-});
+        fileFilter: (req, file, cb) => {
+            if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png')
+                cb(null, true);
+            else cb(null, false);
+        },
 
-module.exports = upload; //multer({storage: storage}); //;
+        fileName: (req, file, cb) => {
+            let datenow = Date.now().toString();
+            cb(null, datenow + file.getOriginalFilename());
+        },
+
+        limits: {
+            fileSize: 1024 * 1024 * 5,
+        },
+    });
+
+    upload = multerInit;
+} catch (err) {
+    console.log(err);
+    throw err;
+}
+
+module.exports = upload;

@@ -83,4 +83,15 @@ module.exports = {
             return res;
         },
     },
+    content: {
+        async retrieve(id, userId) {
+            return await services.fetch.get(
+                'warning',
+                `content/${id}`,
+                {},
+                null,
+                userId
+            );
+        },
+    },
 };
