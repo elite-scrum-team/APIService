@@ -16,7 +16,7 @@ router.post('/status', async (req, res) => {
 router.post('/image', upload.single('image'), async (req, res) => {
     const r = await WarningService.image.create(
         req.body,
-        [req.file],
+        req.files,
         req.userId
     );
     await res.send(r.dataValues, r.status);
