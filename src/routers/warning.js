@@ -13,7 +13,7 @@ router.post('/status', async (req, res) => {
 });
 
 // create image
-router.post('/image', upload.single('image'), async (req, res) => {
+router.post('/image', upload.any(), async (req, res) => {
     const r = await WarningService.image.create(
         req.body,
         req.files,
