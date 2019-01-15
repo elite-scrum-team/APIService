@@ -21,7 +21,7 @@ router.post('/image', upload.single('image'), async (req, res) => {
     }
 
     const r = await WarningService.image.create(
-        { ...req.body, fileURL: req.files[0].path },
+        { ...req.body, fileURL: req.file.path },
         req.userId
     );
     await res.send(r.dataValues, r.status);
