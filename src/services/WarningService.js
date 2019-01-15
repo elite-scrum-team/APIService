@@ -44,18 +44,16 @@ module.exports = {
         },
     },
     image: {
-        async create(data, files, userId) {
-            const warningId = data.warningId;
-            console.log('FILES: ', files);
-            const image = files && files.length > 0 ? files[0].path : null;
-
-            const imageObject = { warningId, image };
+        async create({ warningId, fileURL }, userId) {
+            console.log('SENDING POST REQUEST TO WARNING SERVICE');
+            console.log('WARNINGID', warningId);
+            console.log('FILE URL', fileURL);
 
             return await services.fetch.post(
                 'warning',
                 'image',
                 {},
-                imageObject,
+                { warningId, fileURL },
                 userId
             );
         },
