@@ -37,6 +37,14 @@ router.get('/:id', async (req, res) => {
     await res.send(await r.json(), r.status);
 });
 
+router.get('/:id/content', async (req, res) => {
+    const result = await WarningService.warning.retrieveContent(
+        req.params.id,
+        req.userId
+    )
+    await res.send(await result.json(), result.status)
+})
+
 // create warning
 router.post('/', async (req, res) => {
     const r = await WarningService.warning.create(req.body, req.userId);

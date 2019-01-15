@@ -33,6 +33,15 @@ module.exports = {
                 userId
             );
         },
+        async retrieveContent(id, userId) {
+            return await services.fetch.get(
+                'warning',
+                `warning/${id}`,
+                {},
+                null,
+                userId
+            )
+        }
     },
     image: {
         async create(image) {
