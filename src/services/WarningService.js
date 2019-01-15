@@ -48,6 +48,8 @@ module.exports = {
             const warningId = data.warningId;
             const image = files && files.length > 0 ? files[0].path : null;
 
+            console.log('FILES: ', files);
+
             const imageObject = { warningId, image };
 
             return await services.fetch.post(

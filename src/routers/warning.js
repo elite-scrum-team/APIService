@@ -19,7 +19,7 @@ router.post('/image', upload.single('image'), async (req, res) => {
         [req.file],
         req.userId
     );
-    await res.send(r.dataValues);
+    await res.send(r.dataValues, r.status);
 });
 
 // get categories
