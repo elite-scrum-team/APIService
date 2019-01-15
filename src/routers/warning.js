@@ -41,9 +41,9 @@ router.get('/:id', async (req, res) => {
     await res.send(await r.json(), r.status);
 });
 
-router.get('/:id/content', async (req, res) => {
+router.get('/content', async (req, res) => {
     const result = await WarningService.warning.retrieveContent(
-        req.params.id,
+        req.query.id,
         req.userId
     );
     await res.send(await result.json(), result.status);
