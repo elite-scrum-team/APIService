@@ -45,8 +45,6 @@ module.exports = {
     },
     image: {
         async create({ warningId, fileURL }, userId) {
-            console.log('SENDING POST REQUEST TO WARNING SERVICE');
-            console.log('WARNINGID', warningId);
             console.log('FILE URL', fileURL);
 
             return await services.fetch.post(

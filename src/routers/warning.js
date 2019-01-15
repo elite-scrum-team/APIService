@@ -7,7 +7,6 @@ const router = express.Router();
 
 // create status
 router.post('/status', async (req, res) => {
-    console.log('USER ID: ' + req.userId);
     const r = await WarningService.status.create(req.body, req.userId);
     await res.send(await r.json(), r.status);
 });
@@ -15,7 +14,7 @@ router.post('/status', async (req, res) => {
 // create image
 router.post('/image', upload.single('image'), async (req, res) => {
     console.log('RETURNED FROM GOOGLE CLOUD', req.file);
-    console.log(req);
+
     if (!req.file) {
         res.status(500).send({ error: 'Could not upload image' });
         return;
@@ -25,7 +24,7 @@ router.post('/image', upload.single('image'), async (req, res) => {
         { ...req.body, fileURL: req.file.path },
         req.userId
     );
-    await res.send(r.dataValues, r.status);
+    await res.status(r.status).send({ image: req.file.path });
 });
 
 // get categories
