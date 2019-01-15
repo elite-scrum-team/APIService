@@ -40,12 +40,23 @@ module.exports = {
                 {},
                 null,
                 userId
-            )
-        }
+            );
+        },
     },
     image: {
-        async create(image) {
-            return image;
+        async create(data, files, userId) {
+            const warningId = data.warningId;
+            const image = files && files.length > 0 ? files[0].path : null;
+
+            const imageObject = { warningId, image };
+
+            return await services.fetch.post(
+                'warning',
+                'image',
+                {},
+                imageObject,
+                userId
+            );
         },
     },
     category: {
@@ -70,6 +81,6 @@ module.exports = {
                 userId
             );
             return res;
-        }
-    }
+        },
+    },
 };
