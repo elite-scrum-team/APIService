@@ -13,11 +13,12 @@ router.post('/status', async (req, res) => {
 });
 
 // create image
-router.post('/image', upload.any(), async (req, res) => {
-    console.log(req.body);
-    console.log(req.file);
-    console.log(req.files);
-    const r = await WarningService.image.create(req.body);
+router.post('/image', upload.single('image'), async (req, res) => {
+    const r = await WarningService.image.create(
+        req.body,
+        [req.file],
+        req.userId
+    );
     await res.send(r.dataValues);
 });
 
