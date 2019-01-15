@@ -15,13 +15,14 @@ router.post('/status', async (req, res) => {
 // create image
 router.post('/image', upload.single('image'), async (req, res) => {
     console.log('RETURNED FROM GOOGLE CLOUD', req.file);
+    console.log(req);
     if (!req.file) {
         res.status(500).send({ error: 'Could not upload image' });
         return;
     }
 
     const r = await WarningService.image.create(
-        { ...req.body, fileURL: req.files[0].path },
+        { ...req.body, fileURL: req.file.path },
         req.userId
     );
     await res.send(r.dataValues, r.status);
