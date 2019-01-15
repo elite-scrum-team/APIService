@@ -32,15 +32,6 @@ module.exports = {
                 null,
                 userId
             );
-        },
-        async retrieveContent(id, userId) {
-            return await services.fetch.get(
-                'warning',
-                `warning/${id}`,
-                {},
-                null,
-                userId
-            )
         }
     },
     image: {
@@ -70,6 +61,17 @@ module.exports = {
                 userId
             );
             return res;
+        }
+    },
+    content: {
+        async retrieve(id, userId) {
+            return await services.fetch.get(
+                'warning',
+                `content/${id}`,
+                {},
+                null,
+                userId
+            )
         }
     }
 };
