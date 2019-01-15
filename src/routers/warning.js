@@ -14,7 +14,9 @@ router.post('/status', async (req, res) => {
 
 // create image
 router.post('/image', upload.any('image'), async (req, res) => {
+    console.log('REQUEST', req);
     console.log('RETURNED FROM GOOGLE CLOUD', req.files);
+    if (req.files.length === 0) res.send({ err: 'No files' }, 500);
     const r = await WarningService.image.create(
         { ...req.body, fileURL: req.files[0].path },
         req.userId
