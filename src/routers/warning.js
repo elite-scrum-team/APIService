@@ -43,7 +43,7 @@ router.get('/:id', async (req, res) => {
 
 router.get('/content/:id', async (req, res) => {
     const result = await WarningService.content.retrieve(
-        req.query.id,
+        req.params.id,
         req.userId
     );
     await res.send(await result.json(), result.status);
