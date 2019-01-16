@@ -20,6 +20,6 @@ module.exports = {
     },
 
     async getUserData(userId) {
-        return await services.fetch.get('user', 'user/', {}, userId);
+        return await services.fetch.get('user', 'user', {}, userId);
     },
 };

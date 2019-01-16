@@ -24,7 +24,7 @@ router.get('/user', async (req, res) => {
     }
 
     const r = await UserService.getUserData(req.userId);
-    await res.status(r.status).send(await r.json());
+    await res.send(await r.json(), r.status);
 });
 
 module.exports = router;
