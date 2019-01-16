@@ -21,7 +21,6 @@ module.exports = {
         },
         async get(serviceName, path, query, userId = undefined) {
             if (userId) query['internalUserId'] = userId;
-            console.log('Query: ', query);
             let url = `http://${
                 process.env[serviceName.toUpperCase() + '_SERVICE_SERVICE_HOST']
             }/api/v1/${path}`;

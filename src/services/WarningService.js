@@ -16,12 +16,10 @@ module.exports = {
             );
         },
         async retrive(filters, userId) {
-            console.log('USERID: ', userId);
             return await services.fetch.get(
                 'warning',
                 'warning',
                 filters,
-                null,
                 userId
             );
         },
@@ -30,7 +28,6 @@ module.exports = {
                 'warning',
                 `warning/${id}`,
                 {},
-                null,
                 userId
             );
         },
@@ -39,7 +36,6 @@ module.exports = {
                 'warning',
                 `warning/${id}`,
                 {},
-                null,
                 userId
             );
         },
@@ -63,7 +59,6 @@ module.exports = {
                 'warning',
                 'category',
                 {},
-                null,
                 userId
             );
             return res;
@@ -87,7 +82,6 @@ module.exports = {
                 'warning',
                 `content/${id}`,
                 {},
-                null,
                 userId
             );
         },
