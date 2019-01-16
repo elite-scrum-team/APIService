@@ -17,7 +17,8 @@ module.exports = async (req, res, next) => {
         return;
     }
 
-    req.userId = (await auth.validate(split[1])).id;
+    const decoded = await auth.validate(split[1]);
+    req.userId = decoded ? decoded.id : undefined;
 
     next();
 };
