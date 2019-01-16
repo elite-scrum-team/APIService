@@ -18,4 +18,8 @@ module.exports = {
     async register(user) {
         return await services.fetch.post('user', 'user/register', {}, user);
     },
+
+    async getUserData(userId) {
+        return await services.fetch.get('user', 'user/', {}, userId);
+    },
 };

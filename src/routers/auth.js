@@ -16,4 +16,15 @@ router.post('/register', async (req, res) => {
     await res.send(r.json(), r.status);
 });
 
+router.get('/user', async (req, res) => {
+    // Check if userId is provided
+    if (!req.userId) {
+        res.status(400).send({ error: 'You need to be authenticated' });
+        return;
+    }
+
+    const r = await UserService.getUserData(req.userId);
+    await res.status(r.status).send(await r.json());
+});
+
 module.exports = router;
