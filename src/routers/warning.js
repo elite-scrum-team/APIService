@@ -35,8 +35,6 @@ router.get('/category', async (req, res) => {
 
 // get warnings
 router.get('/', async (req, res) => {
-    console.log(req.query);
-    console.log(req.userId);
     const r = await WarningService.warning.retrive(req.query, req.userId);
     await res.send(await r.json(), r.status);
 });
