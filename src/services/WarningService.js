@@ -16,6 +16,7 @@ module.exports = {
             );
         },
         async retrive(filters, userId) {
+            console.log('USERID: ', userId);
             return await services.fetch.get(
                 'warning',
                 'warning',
