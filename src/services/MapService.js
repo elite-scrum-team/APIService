@@ -9,12 +9,7 @@ if (!process.env.MAP_SERVICE_SERVICE_HOST) {
 module.exports = {
     municipality: {
         async retrieve(userId) {
-            return await services.fetch.get(
-                'map',
-                'municipality',
-                null,
-                userId
-            );
+            return await services.fetch.get('map', 'municipality', {}, userId);
         },
     },
 };
