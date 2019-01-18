@@ -23,12 +23,12 @@ router.post('/image', upload.single('image'), async (req, res) => {
 
 // get events
 router.get('/', async (req, res) => {
-    const r = await EventService.warning.retrive(req.query, req.userId);
+    const r = await EventService.event.retrive(req.query, req.userId);
     await res.send(await r.json(), r.status);
 });
 
 router.get('/:id', async (req, res) => {
-    const r = await EventService.warning.retriveOne(req.params.id, req.userId);
+    const r = await EventService.event.retriveOne(req.params.id, req.userId);
     await res.send(await r.json(), r.status);
 });
 
@@ -42,7 +42,7 @@ router.get('/content/:id', async (req, res) => {
 
 // create event
 router.post('/', async (req, res) => {
-    const r = await EventService.warning.create(req.body, req.userId);
+    const r = await EventService.event.create(req.body, req.userId);
     await res.send(await r.json(), r.status);
 });
 
