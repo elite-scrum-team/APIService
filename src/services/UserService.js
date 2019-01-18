@@ -3,7 +3,7 @@ const services = require('../util/service.js');
 console.log(`user-service: ${process.env.USER_SERVICE_SERVICE_HOST}`);
 
 if (!process.env.USER_SERVICE_SERVICE_HOST) {
-    process.env['USER_SERVICE_SERVICE_HOST'] = '35.228.119.12';
+    process.env['USER_SERVICE_SERVICE_HOST'] = '35.228.19.181';
 }
 
 module.exports = {
