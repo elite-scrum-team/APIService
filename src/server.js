@@ -33,6 +33,7 @@ app.use(require('./middleware/authenticate.js'));
 app.use('/api/v1/auth', require('./routers/auth'));
 app.use('/api/v1/warning', require('./routers/warning.js'));
 app.use('/api/v1/user', require('./routers/user.js'));
+app.use('/api/v1/location', require('./routers/location.js'));
 
 // get ui
 app.get('/', async (req, res) => {
