@@ -61,4 +61,9 @@ router.post('/', async (req, res) => {
     await res.send(await r.json(), r.status);
 });
 
+router.post('/contract', async (req, res) => {
+    const result = await WarningService.contract.create(req.body, req.userId);
+    await res.send(await result.json(), result.status);
+});
+
 module.exports = router;

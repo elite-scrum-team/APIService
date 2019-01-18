@@ -22,4 +22,8 @@ module.exports = {
     async getUserData(userId) {
         return await services.fetch.get('user', 'user', {}, userId);
     },
+
+    async retrieveGroups(filters, userId) {
+        return await services.fetch.get('user', 'group', filters, userId);
+    },
 };

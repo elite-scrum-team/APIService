@@ -86,4 +86,15 @@ module.exports = {
             );
         },
     },
+    contract: {
+        async create(contractData, userId) {
+            return await services.fetch.post(
+                'warning',
+                'contract',
+                {},
+                contractData,
+                userId
+            );
+        },
+    },
 };
