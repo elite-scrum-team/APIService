@@ -50,6 +50,10 @@ app.get('/metrics', async (req, res) => {
     await res.end(client.register.metrics());
 });
 
+app.use((req, res) => {
+    res.status(404).send({ error: 'Not found' });
+});
+
 const port = process.env.port || 8080;
 
 app.listen(port, () => console.log(`listening on port ${port}`));

@@ -9,13 +9,13 @@ module.exports = {
         async create(event) {
             return await services.fetch.post('event', 'event', {}, event);
         },
-        async retrive(filters) {
-            return await services.fetch.get('event', 'event', filters);
+        async retrive(municipalityId) {
+            return await services.fetch.get(
+                'event',
+                'event/municipality/'.concat(municipalityId)
+            );
         },
         async retriveOne(id) {
-            return await services.fetch.get('event', `event/${id}`, {});
-        },
-        async retrieveContent(id) {
             return await services.fetch.get('event', `event/${id}`, {});
         },
     },

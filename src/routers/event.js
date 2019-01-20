@@ -1,14 +1,14 @@
 const express = require('express');
 const upload = require('../middleware/filehandler');
+const isAuth = require('../middleware/isAuth');
+const userService = require('../services/UserService');
 
 const EventService = require('../services/EventService');
 
 const router = express.Router();
 
 // create image
-router.post('/image', upload.single('image'), async (req, res) => {
-    console.log('RETURNED FROM GOOGLE CLOUD', req.file);
-
+router.post('/image', isAuth, upload.single('image'), async (req, res) => {
     if (!req.file) {
         res.status(500).send({ error: 'Could not upload image' });
         return;
@@ -21,26 +21,35 @@ router.post('/image', upload.single('image'), async (req, res) => {
     await res.status(r.status).send({ image: req.file.path });
 });
 
-// get events
-router.get('/', async (req, res) => {
-    const r = await EventService.event.retrive(req.query);
-    await res.send(await r.json(), r.status);
+// create event
+router.post('/', isAuth, async (req, res) => {
+    const user_group = await userService.retrieveGroups({}, req.userData.id);
+    const conf = user_group.find(e => e.id === req.body.location.municipality);
+    if (conf) {
+        req.body.userId = req.userData.id;
+        const r = await EventService.event.create(req.body);
+        await res.send(await r.json(), r.status);
+    }
+    return res.status(401).json({
+        message: 'Auth failed',
+    });
 });
 
+// get a spesific event
 router.get('/:id', async (req, res) => {
+    console.log('Hello :D');
     const r = await EventService.event.retriveOne(req.params.id);
+    await res.send(await r.json(), r.status);
+});
+// get all events in a municipality
+router.get('/municipality/:id', async (req, res) => {
+    const r = await EventService.event.retrive(req.params.id);
     await res.send(await r.json(), r.status);
 });
 
 router.get('/content/:id', async (req, res) => {
     const result = await EventService.content.retrieve(req.params.id);
     await res.send(await result.json(), result.status);
-});
-
-// create event
-router.post('/', async (req, res) => {
-    const r = await EventService.event.create(req.body);
-    await res.send(await r.json(), r.status);
 });
 
 module.exports = router;
