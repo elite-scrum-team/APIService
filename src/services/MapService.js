@@ -12,4 +12,14 @@ module.exports = {
             return await services.fetch.get('map', 'municipality', {}, userId);
         },
     },
+    location: {
+        async close(location, userId) {
+            return await services.fetch.get(
+                'map',
+                `location/close/${location.lat}/${location.lng}`,
+                {},
+                userId
+            );
+        },
+    },
 };

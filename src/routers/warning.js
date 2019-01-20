@@ -2,6 +2,7 @@ const express = require('express');
 const upload = require('../middleware/filehandler');
 
 const WarningService = require('../services/WarningService');
+const MapService = require('../services/MapService');
 
 const router = express.Router();
 
@@ -53,6 +54,28 @@ router.get('/content/:id', async (req, res) => {
         req.userId
     );
     await res.send(await result.json(), result.status);
+});
+
+router.get('/close/:lat/:lng', async (req, res) => {
+    // Get locationIds based on position
+    const location = { lat: req.params.lat, lng: req.params.lng };
+
+    const result = await MapService.location.close(location, req.userId);
+    const locations = await result.json();
+
+    if (locations.length === 0) {
+        await res.status(200).send([]);
+        return;
+    }
+
+    // Get warnings based on locations
+    const locationIds = locations.map(l => l.id);
+
+    const r = await WarningService.warning.retrive(
+        { positions: locationIds },
+        req.userId
+    );
+    await res.send(await r.json(), r.status);
 });
 
 // create warning

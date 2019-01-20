@@ -37,7 +37,6 @@ router.post('/', isAuth, async (req, res) => {
 
 // get a spesific event
 router.get('/:id', async (req, res) => {
-    console.log('Hello :D');
     const r = await EventService.event.retriveOne(req.params.id);
     await res.send(await r.json(), r.status);
 });
