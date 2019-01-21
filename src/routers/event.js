@@ -24,20 +24,20 @@ router.post('/image', isAuth, upload.single('image'), async (req, res) => {
 // create event
 router.post('/', isAuth, async (req, res) => {
     const response = await userService.getUserData(req.userId);
-    if (response.isError) throw Error('The fuk');
+    if (response.isError) res.status(500).send({ error: 'server error' });
     const user = await response.json();
-    console.log(user);
     const conf = user.group.find(
         e => e.municipalitiy === req.body.location.municipalityId
     );
     if (conf) {
-        req.body.userId = req.userData.id;
+        req.body.userId = req.userId;
         const r = await EventService.event.create(req.body);
         await res.send(await r.json(), r.status);
+    } else {
+        await res.status(401).json({
+            message: 'Auth failed',
+        });
     }
-    return res.status(401).json({
-        message: 'Auth failed',
-    });
 });
 
 // get a spesific event
