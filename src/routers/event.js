@@ -23,7 +23,7 @@ router.post('/image', isAuth, upload.single('image'), async (req, res) => {
 
 // create event
 router.post('/', isAuth, async (req, res) => {
-    const user_group = await userService.retrieveGroups({}, req.userData.id);
+    const user_group = await userService.retrieveGroups({}, req.userId);
     const conf = user_group.find(e => e.id === req.body.location.municipality);
     if (conf) {
         req.body.userId = req.userData.id;
