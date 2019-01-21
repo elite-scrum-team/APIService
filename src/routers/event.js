@@ -73,7 +73,7 @@ router.get('/municipality/:id', async (req, res) => {
 
 // Get newest events
 router.get('/', async (req, res) => {
-    const r = await EventService.event.retrieve(req.query);
+    const r = await EventService.event.retrieve(req.query, req.userId);
     await res.send(await r.json(), r.status);
 });
 

@@ -18,13 +18,8 @@ module.exports = {
         async retriveOne(id) {
             return await services.fetch.get('event', `event/${id}`, {});
         },
-        async retrieve(filters) {
-            return await services.fetch.get(
-                'event',
-                'event',
-                filters,
-                req.userId
-            );
+        async retrieve(filters, userId) {
+            return await services.fetch.get('event', 'event', filters, userId);
         },
     },
     image: {
