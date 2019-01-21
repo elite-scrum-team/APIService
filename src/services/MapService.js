@@ -21,5 +21,12 @@ module.exports = {
                 userId
             );
         },
+        async retrieveInfo(location) {
+            return await services.fetch.get(
+                'map',
+                `location/info/${location.lat}/${location.lng}`,
+                {}
+            );
+        },
     },
 };

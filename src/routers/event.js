@@ -5,6 +5,8 @@ const userService = require('../services/UserService');
 
 const EventService = require('../services/EventService');
 
+const MapService = require('../services/MapService');
+
 const router = express.Router();
 
 // create image
@@ -28,18 +30,15 @@ router.post('/', isAuth, async (req, res) => {
         if (response.isError) res.status(500).send({ error: 'server error' });
         const user = await response.json();
 
-        console.log(user.group);
+        const resp = await MapService.location.retrieveInfo(req.body.location);
+
+        if (resp.isError) res.status(500).send({ error: 'server error' });
+
+        const munici = await resp.json();
 
         const conf = user.group
             .filter(e => e)
-            .find(e => {
-                console.log(
-                    e.municipalitiy === req.body.location.municipalityId
-                );
-                return e.municipalitiy === req.body.location.municipalityId;
-            });
-
-        console.log(conf);
+            .find(e => e.municipalitiy === munici.municipalityId);
 
         if (conf) {
             req.body.userId = req.userId;
