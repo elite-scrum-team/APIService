@@ -34,13 +34,17 @@ router.post('/', isAuth, async (req, res) => {
 
         if (resp.isError) res.status(500).send({ error: 'server error' });
 
+        console.log(resp + 'response');
         const munici = await resp.json();
+
+        console.log(munici);
 
         const conf = user.group
             .filter(e => e)
             .find(e => e.municipalitiy === munici.municipalityId);
 
         if (conf) {
+            console.log('inside conf');
             req.body.userId = req.userId;
             const r = await EventService.event.create(req.body);
             await res.send(await r.json(), r.status);
