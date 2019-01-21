@@ -1,5 +1,6 @@
 const express = require('express');
 const upload = require('../middleware/filehandler');
+const isAuth = require('../middleware/isAuth');
 
 const WarningService = require('../services/WarningService');
 const MapService = require('../services/MapService');
@@ -90,7 +91,7 @@ router.post('/contract', async (req, res) => {
 });
 
 // create comment
-router.post('/comment', upload.single('image'), async (req, res) => {
+router.post('/comment', isAuth, upload.single('image'), async (req, res) => {
     const r = await WarningService.comment.create(
         { ...req.body, fileURL: req.file ? req.file.path : null },
         res.userId
