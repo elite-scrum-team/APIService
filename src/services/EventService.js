@@ -9,7 +9,7 @@ module.exports = {
         async create(event) {
             return await services.fetch.post('event', 'event', {}, event);
         },
-        async retrive(municipalityId) {
+        async retrieve(municipalityId) {
             return await services.fetch.get(
                 'event',
                 'event/municipality/'.concat(municipalityId)

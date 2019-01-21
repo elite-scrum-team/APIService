@@ -67,7 +67,7 @@ router.get('/:id', async (req, res) => {
 });
 // get all events in a municipality
 router.get('/municipality/:id', async (req, res) => {
-    const r = await EventService.event.retrive(req.params.id);
+    const r = await EventService.event.retrieve(req.params.id);
     await res.send(await r.json(), r.status);
 });
 
