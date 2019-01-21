@@ -90,8 +90,16 @@ router.post('/contract', async (req, res) => {
 });
 
 // create comment
-router.post('/comment', async (req, res) => {
-    const r = await WarningService.comment.create(req.body, res.userId);
+router.post('/comment', upload.single('image'), async (req, res) => {
+    if (!req.file) {
+        res.status(500).send({ error: 'Could not upload image' });
+        return;
+    }
+
+    const r = await WarningService.comment.create(
+        { ...req.body, fileURL: req.file.path },
+        res.userId
+    );
     await res.send(await r.json(), r.status);
 });
 
