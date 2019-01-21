@@ -80,12 +80,12 @@ router.get('/close/:lat/:lng', async (req, res) => {
 });
 
 // create warning
-router.post('/', async (req, res) => {
+router.post('/', isAuth, async (req, res) => {
     const r = await WarningService.warning.create(req.body, req.userId);
     await res.send(await r.json(), r.status);
 });
 
-router.post('/contract', async (req, res) => {
+router.post('/contract', isAuth, async (req, res) => {
     const result = await WarningService.contract.create(req.body, req.userId);
     await res.send(await result.json(), result.status);
 });
