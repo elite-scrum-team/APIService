@@ -72,7 +72,7 @@ router.get('/close/:lat/:lng', async (req, res) => {
     const locationIds = locations.map(l => l.id);
 
     const r = await WarningService.warning.retrive(
-        { positions: locationIds },
+        { ...req.query, positions: locationIds },
         req.userId
     );
     await res.send(await r.json(), r.status);
