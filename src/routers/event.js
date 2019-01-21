@@ -34,7 +34,7 @@ router.post('/', isAuth, async (req, res) => {
 
         if (resp.isError) res.status(500).send({ error: 'server error' });
 
-        console.log(resp + 'response');
+        console.log(resp);
         const munici = await resp.json();
 
         console.log(munici);
