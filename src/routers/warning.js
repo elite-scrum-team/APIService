@@ -89,4 +89,10 @@ router.post('/contract', async (req, res) => {
     await res.send(await result.json(), result.status);
 });
 
+// create comment
+router.post('/comment', async (req, res) => {
+    const r = await WarningService.comment.create(req.body, res.userId);
+    await res.send(await r.json(), r.status);
+});
+
 module.exports = router;
