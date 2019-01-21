@@ -97,4 +97,15 @@ module.exports = {
             );
         },
     },
+    comment: {
+        async create(commentData, userId) {
+            return await services.fetch.post(
+                'warning',
+                'comment',
+                {},
+                commentData,
+                userId
+            );
+        },
+    },
 };
