@@ -24,7 +24,7 @@ router.post('/image', isAuth, upload.single('image'), async (req, res) => {
 });
 
 // create event
-router.post('/', isAuth, async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const response = await userService.getUserData(req.userId);
         if (response.isError) res.status(500).send({ error: 'server error' });
@@ -54,7 +54,9 @@ router.post('/', isAuth, async (req, res) => {
             });
         }
     } catch (error) {
-        res.send(error);
+        res.send({
+            error: error,
+        });
     }
 });
 
