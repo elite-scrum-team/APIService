@@ -1,5 +1,6 @@
 const express = require('express');
 const upload = require('../middleware/filehandler');
+const isAuth = require('../middleware/isAuth');
 
 const WarningService = require('../services/WarningService');
 const MapService = require('../services/MapService');
@@ -79,18 +80,18 @@ router.get('/close/:lat/:lng', async (req, res) => {
 });
 
 // create warning
-router.post('/', async (req, res) => {
+router.post('/', isAuth, async (req, res) => {
     const r = await WarningService.warning.create(req.body, req.userId);
     await res.send(await r.json(), r.status);
 });
 
-router.post('/contract', async (req, res) => {
+router.post('/contract', isAuth, async (req, res) => {
     const result = await WarningService.contract.create(req.body, req.userId);
     await res.send(await result.json(), result.status);
 });
 
 // create comment
-router.post('/comment', upload.single('image'), async (req, res) => {
+router.post('/comment', isAuth, upload.single('image'), async (req, res) => {
     const r = await WarningService.comment.create(
         { ...req.body, fileURL: req.file ? req.file.path : null },
         res.userId

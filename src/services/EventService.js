@@ -9,7 +9,7 @@ module.exports = {
         async create(event) {
             return await services.fetch.post('event', 'event', {}, event);
         },
-        async retrieve(municipalityId) {
+        async retrieveByMunicipality(municipalityId) {
             return await services.fetch.get(
                 'event',
                 'event/municipality/'.concat(municipalityId)
@@ -18,8 +18,13 @@ module.exports = {
         async retriveOne(id) {
             return await services.fetch.get('event', `event/${id}`, {});
         },
+
         async update(id, event) {
             return await services.fetch.put('event', `event/${id}`, event);
+        },
+
+        async retrieve(filters, userId) {
+            return await services.fetch.get('event', 'event', filters, userId);
         },
     },
     image: {
