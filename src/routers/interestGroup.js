@@ -35,3 +35,5 @@ router.delete('/subscribe/:id', isAuth, async (req, res) => {
         res.send({ error: error });
     }
 });
+
+module.exports = router;
