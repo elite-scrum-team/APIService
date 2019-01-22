@@ -34,6 +34,21 @@ module.exports = {
                 },
             });
         },
+        async put(serviceName, path, body, userId = undefined) {
+            if (userId) query['internalUserId'] = userId;
+            let url = `http://${
+                process.env[serviceName.toUpperCase() + '_SERVICE_SERVICE_HOST']
+            }/api/v1/${path}`;
+
+            return await fetch(url, {
+                method: 'PUT',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(body),
+            });
+        },
     },
 
     /*
@@ -41,9 +56,9 @@ module.exports = {
         let url = `http://${process.env[serviceName.toUpperCase() + '_SERVICE_SERVICE_HOST']}/api/v1/${path}`;
         if (userId) {
             url += `internalUserId`
-        }        
+        }
         return await fetch(
-                        { 
+                        {
                             headers: {
                                 'Accept': 'application/json',
                                 'Content-Type': 'application/json'

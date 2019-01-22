@@ -24,7 +24,7 @@ router.post('/image', isAuth, upload.single('image'), async (req, res) => {
 });
 
 // create event
-router.post('/', async (req, res) => {
+router.post('/', isAuth, async (req, res) => {
     try {
         const response = await userService.getUserData(req.userId);
         if (response.isError) res.status(500).send({ error: 'server error' });
@@ -44,7 +44,6 @@ router.post('/', async (req, res) => {
             .find(e => e.municipalitiy === munici.municipalityId);
 
         if (conf) {
-            console.log('inside conf');
             req.body.userId = req.userId;
             const r = await EventService.event.create(req.body);
             await res.send(await r.json(), r.status);
@@ -74,6 +73,34 @@ router.get('/municipality/:id', async (req, res) => {
 router.get('/content/:id', async (req, res) => {
     const result = await EventService.content.retrieve(req.params.id);
     await res.send(await result.json(), result.status);
+});
+// update a event
+router.put('/:id', isAuth, async (req, res) => {
+    try {
+        const response = await userService.getUserData(req.userId);
+        if (response.isError) res.status(500).send({ error: 'server error' });
+        const user = await response.json();
+
+        const resp = await MapService.location.retrieveInfo(req.body.location);
+
+        if (resp.isError) res.status(500).send({ error: 'server error' });
+
+        const munici = await resp.json();
+        const conf = user.group
+            .filter(e => e)
+            .find(e => e.municipalitiy === munici.municipalityId);
+
+        if (conf) {
+            const r = await EventService.event.update(req.params.id, req.body);
+            await res.send(await r.json(), r.status);
+        } else {
+            await res.status(401).json({
+                message: 'Auth failed',
+            });
+        }
+    } catch (error) {
+        res.send({ error: error });
+    }
 });
 
 module.exports = router;

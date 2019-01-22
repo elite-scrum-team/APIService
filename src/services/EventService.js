@@ -18,6 +18,9 @@ module.exports = {
         async retriveOne(id) {
             return await services.fetch.get('event', `event/${id}`, {});
         },
+        async update(id, event) {
+            return await services.fetch.put('event', `event/${id}`, event);
+        },
     },
     image: {
         async create({ eventId, fileURL }) {
