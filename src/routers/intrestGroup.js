@@ -1,12 +1,10 @@
 const express = require('express');
-const upload = require('../middleware/filehandler');
 const isAuth = require('../middleware/isAuth');
 const InterestGroupService = require('../services/IntrestGroupService');
-const userService = require('../services/UserService');
 
 const router = express.Router();
 
-// c
+// subscribe to a warning
 router.post('/subscribe/:id', isAuth, async (req, res) => {
     try {
         const warningId = req.params.id;
@@ -22,7 +20,7 @@ router.post('/subscribe/:id', isAuth, async (req, res) => {
     }
 });
 
-// create image
+// subscribe to a warning
 router.delete('/subscribe/:id', isAuth, async (req, res) => {
     try {
         const warningId = req.params.id;
