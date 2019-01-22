@@ -19,6 +19,16 @@ module.exports = {
         return await services.fetch.post('user', 'user/register', {}, user);
     },
 
+    async changePassword(userId, password) {
+        return await services.fetch.post(
+            'user',
+            'user/changePassword',
+            {},
+            userId,
+            password
+        );
+    },
+
     async getUserData(userId) {
         return await services.fetch.get('user', 'user', {}, userId);
     },

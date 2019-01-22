@@ -16,6 +16,12 @@ router.post('/register', async (req, res) => {
     await res.send(r.json(), r.status);
 });
 
+router.post('/change', async (req, res) => {
+    const password = req.body.password;
+    const r = await UserService.changePassword(req.userId, password);
+    await res.send(r.json(), r.status);
+});
+
 router.get('/user', async (req, res) => {
     // Check if userId is provided
     if (!req.userId) {
