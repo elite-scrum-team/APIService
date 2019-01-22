@@ -49,6 +49,21 @@ module.exports = {
                 body: JSON.stringify(body),
             });
         },
+        async delete(serviceName, path, body, userId = undefined) {
+            if (userId) query['internalUserId'] = userId;
+            let url = `http://${
+                process.env[serviceName.toUpperCase() + '_SERVICE_SERVICE_HOST']
+            }/api/v1/${path}`;
+
+            return await fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(body),
+            });
+        },
     },
 
     /*
