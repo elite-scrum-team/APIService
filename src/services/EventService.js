@@ -39,7 +39,7 @@ module.exports = {
         async update({ eventId, fileURL }) {
             return await services.fetch.put(
                 'event',
-                'image/',
+                'image',
                 {},
                 { eventId, fileURL }
             );

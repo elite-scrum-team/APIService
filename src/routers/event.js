@@ -23,6 +23,21 @@ router.post('/image', isAuth, upload.single('image'), async (req, res) => {
     await res.status(r.status).send({ image: req.file.path });
 });
 
+router.put('/image', isAuth, upload.single('image'), async (req, res) => {
+    if (!req.file) {
+        res.status(500).send({ error: 'could not upload Image' });
+        return;
+    }
+
+    const eventId = req.body.eventId;
+
+    const result = await EventService.image.update({
+        eventId,
+        fileURL: req.file.path,
+    });
+    await res.status(result.status).send({ image: req.file.path });
+});
+
 // create event
 router.post('/', isAuth, async (req, res) => {
     try {
@@ -97,8 +112,11 @@ router.put('/:id', isAuth, async (req, res) => {
             .find(e => e.municipalitiy === munici.municipalityId);
 
         if (conf) {
-            const r = await EventService.event.update(req.params.id, req.body);
-            await res.send(await r.json(), r.status);
+            const body = req.body;
+            const eventId = req.params.id;
+
+            const promise1 = await EventService.event.update(eventId, body);
+            await res.send(await promise1.json(), promise1.status);
         } else {
             await res.status(401).json({
                 message: 'Auth failed',
