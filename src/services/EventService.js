@@ -29,14 +29,15 @@ module.exports = {
     },
     image: {
         async create({ eventId, fileURL }) {
-            console.log('FILE URL', fileURL);
-
             return await services.fetch.post(
                 'event',
                 'image',
                 {},
                 { eventId, fileURL }
             );
+        },
+        async update({ eventId, fileURL }) {
+            return await services.fetch.put('event');
         },
     },
     content: {

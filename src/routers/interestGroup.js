@@ -5,11 +5,11 @@ const InterestGroupService = require('../services/IntrestGroupService');
 const router = express.Router();
 
 // subscribe to a warning
-router.post('/subscribe/:id', async (req, res) => {
+router.post('/subscribe/:id', isAuth, async (req, res) => {
     console.log('outside catch');
     try {
         const warningId = req.params.id;
-        const userId = '6ccc6d70-f39e-4020-ad12-2d89f13e34a3';
+        const userId = req.userId;
 
         const r = await InterestGroupService.warning.subscribe({
             warningId,
@@ -24,10 +24,10 @@ router.post('/subscribe/:id', async (req, res) => {
 });
 
 // unsubscribe to a warning
-router.delete('/subscribe/:id', async (req, res) => {
+router.delete('/subscribe/:id', isAuth, async (req, res) => {
     try {
         const warningId = req.params.id;
-        const userId = '6ccc6d70-f39e-4020-ad12-2d89f13e34a3';
+        const userId = req.userId;
 
         const r = await InterestGroupService.warning.unsubscribe({
             warningId,
