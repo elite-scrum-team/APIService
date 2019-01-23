@@ -35,6 +35,14 @@ router.get('/category', async (req, res) => {
     await res.send(await r.json(), r.status);
 });
 
+router.get('/category/:id', async (req, res) => {
+    const r = await WarningService.category.retrieveOne(
+        req.params.id,
+        req.userId
+    );
+    await res.send(await r.json(), r.status);
+});
+
 // get warnings
 router.get('/', async (req, res) => {
     const r = await WarningService.warning.retrive(req.query, req.userId);
@@ -87,6 +95,16 @@ router.post('/', isAuth, async (req, res) => {
 
 router.post('/contract', isAuth, async (req, res) => {
     const result = await WarningService.contract.create(req.body, req.userId);
+    await res.send(await result.json(), result.status);
+});
+
+// change warning
+router.put('/:id', isAuth, async (req, res) => {
+    const result = await WarningService.warning.update(
+        req.params.id,
+        req.body,
+        req.userId
+    );
     await res.send(await result.json(), result.status);
 });
 
