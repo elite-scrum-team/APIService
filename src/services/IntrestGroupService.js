@@ -9,7 +9,7 @@ module.exports = {
         async subscribe({ warningId, userId }) {
             return await services.fetch.post(
                 'INTEREST_GROUP',
-                'warning/subscribe',
+                'subscribe',
                 {},
                 { warningId },
                 userId
@@ -19,7 +19,7 @@ module.exports = {
         async unsubscribe({ warningId, userId }) {
             return await services.fetch.delete(
                 'INTEREST_GROUP',
-                'warning/unsubscribe',
+                'unsubscribe',
                 {},
                 { warningId },
                 userId
