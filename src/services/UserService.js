@@ -24,8 +24,8 @@ module.exports = {
             'user',
             'user/changePassword',
             {},
-            userId,
-            password
+            { password },
+            userId
         );
     },
 
