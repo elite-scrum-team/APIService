@@ -1,7 +1,7 @@
 const services = require('../util/service.js');
 
 if (!process.env.INTEREST_GROUP_SERVICE_SERVICE_HOST) {
-    process.env['INTEREST_GROUP_SERVICE_SERVICE_HOST'] = '10.166.0.16:80';
+    process.env['INTEREST_GROUP_SERVICE_SERVICE_HOST'] = '10.166.0.16';
 }
 
 module.exports = {
