@@ -29,6 +29,16 @@ module.exports = {
         );
     },
 
+    async forgotPassword(email) {
+        return await services.fetch.post(
+            'user',
+            'user/forgotcauseimretard',
+            {},
+            { email },
+            ''
+        );
+    },
+
     async getUserData(userId) {
         return await services.fetch.get('user', 'user', {}, userId);
     },

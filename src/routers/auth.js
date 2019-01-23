@@ -22,6 +22,12 @@ router.post('/change', async (req, res) => {
     await res.send(r.json(), r.status);
 });
 
+router.post('/forgot', async (req, res) => {
+    const email = req.body.email;
+    const r = await UserService.forgotPassword(email);
+    await res.send(r.json(), r.status);
+});
+
 router.get('/user', async (req, res) => {
     // Check if userId is provided
     if (!req.userId) {
