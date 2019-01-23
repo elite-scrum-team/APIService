@@ -37,7 +37,12 @@ module.exports = {
             );
         },
         async update({ eventId, fileURL }) {
-            return await services.fetch.put('event');
+            return await services.fetch.put(
+                'event',
+                'image/',
+                {},
+                { eventId, fileURL }
+            );
         },
     },
     content: {
