@@ -5,7 +5,7 @@ const InterestGroupService = require('../services/IntrestGroupService');
 const router = express.Router();
 
 // subscribe to a warning
-router.post('/subscribe/:id', isAuth, async (req, res) => {
+router.post('subscribe/:id', isAuth, async (req, res) => {
     try {
         const warningId = req.params.id;
         const userId = req.userId;
@@ -24,7 +24,7 @@ router.post('/subscribe/:id', isAuth, async (req, res) => {
 });
 
 // unsubscribe to a warning
-router.delete('/subscribe/:id', isAuth, async (req, res) => {
+router.delete('subscribe/:id', isAuth, async (req, res) => {
     try {
         const warningId = req.params.id;
         const userId = req.userId;
