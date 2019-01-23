@@ -20,6 +20,7 @@ module.exports = {
             return await services.fetch.delete(
                 'INTEREST_GROUP',
                 'unsubscribe',
+                {},
                 { warningId },
                 userId
             );
