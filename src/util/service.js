@@ -54,7 +54,8 @@ module.exports = {
             let url = `http://${
                 process.env[serviceName.toUpperCase() + '_SERVICE_SERVICE_HOST']
             }/api/v1/${path}`;
-
+            const qs = querystring.stringify(query);
+            if (qs) url += `?${qs}`;
             return await fetch(url, {
                 method: 'DELETE',
                 headers: {
