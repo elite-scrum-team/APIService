@@ -40,7 +40,7 @@ app.use('/api/v1/interestGroup', require('./routers/interestGroup.js'));
 // get ui
 app.get('/', async (req, res) => {
     await res.send({
-        message: 'UI will be on this url :)',
+        message: 'API will be on this url :)',
     });
 });
 

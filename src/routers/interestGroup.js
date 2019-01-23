@@ -9,18 +9,21 @@ router.post('/subscribe/:id', isAuth, async (req, res) => {
     try {
         const warningId = req.params.id;
         const userId = req.userId;
+        console.log('I am here');
 
         const r = await InterestGroupService.warning.subscribe({
             warningId,
             userId,
         });
+        console.log(await r.json());
+
         await res.send(await r.json(), r.status);
     } catch (error) {
         res.send({ error: error });
     }
 });
 
-// subscribe to a warning
+// unsubscribe to a warning
 router.delete('/subscribe/:id', isAuth, async (req, res) => {
     try {
         const warningId = req.params.id;
