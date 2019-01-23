@@ -1,14 +1,14 @@
 const services = require('../util/service.js');
 
 if (!process.env.INTEREST_GROUP_SERVICE_SERVICE_HOST) {
-    process.env['INTEREST_GROUP_SERVICE_SERVICE_HOST'] = '10.166.0.16';
+    process.env['INTEREST_GROUP_SERVICE_SERVICE_HOST'] = 'http://127.0.0.1:80';
 }
 
 module.exports = {
     warning: {
         async subscribe({ warningId, userId }) {
             return await services.fetch.post(
-                'INTEREST_GROUP',
+                'interest_group',
                 'warning/subscribe',
                 {},
                 { warningId },
@@ -18,7 +18,7 @@ module.exports = {
 
         async unsubscribe({ warningId, userId }) {
             return await services.fetch.delete(
-                'INTEREST_GROUP',
+                'interest_group',
                 'warning/unsubscribe',
                 {},
                 { warningId },
