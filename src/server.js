@@ -36,6 +36,7 @@ app.use('/api/v1/user', require('./routers/user.js'));
 app.use('/api/v1/location', require('./routers/location.js'));
 app.use('/api/v1/event', require('./routers/event.js'));
 app.use('/api/v1/interestGroup', require('./routers/interestGroup.js'));
+app.use('/api/v1/analytics', require('./routers/analytics'))
 
 // get ui
 app.get('/', async (req, res) => {
