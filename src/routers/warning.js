@@ -35,6 +35,14 @@ router.get('/category', async (req, res) => {
     await res.send(await r.json(), r.status);
 });
 
+router.get('/category/:id', async (req, res) => {
+    const r = await WarningService.category.retrieveOne(
+        req.params.id,
+        req.userId
+    );
+    await res.send(await r.json(), r.status);
+});
+
 // get warnings
 router.get('/', async (req, res) => {
     const r = await WarningService.warning.retrive(req.query, req.userId);

@@ -72,6 +72,15 @@ module.exports = {
             );
             return res;
         },
+
+        async retrieveOne(id, userId) {
+            return await services.fetch.get(
+                'warning',
+                `category/${id}`,
+                {},
+                userId
+            );
+        },
     },
     status: {
         async create(statusData, userId) {
