@@ -90,6 +90,16 @@ router.post('/contract', isAuth, async (req, res) => {
     await res.send(await result.json(), result.status);
 });
 
+// change warning
+router.put('/:id', isAuth, async (req, res) => {
+    const result = await WarningService.warning.update(
+        req.params.id,
+        req.body,
+        req.userId
+    );
+    await res.send(await result.json(), result.status);
+});
+
 // create comment
 router.post('/comment', isAuth, upload.single('image'), async (req, res) => {
     const r = await WarningService.comment.create(

@@ -39,6 +39,15 @@ module.exports = {
                 userId
             );
         },
+        async update(id, data, userId) {
+            return await services.fetch.put(
+                'warning',
+                `warning/${id}`,
+                {},
+                data,
+                userId
+            );
+        },
     },
     image: {
         async create({ warningId, fileURL }, userId) {

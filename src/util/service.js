@@ -34,7 +34,7 @@ module.exports = {
                 },
             });
         },
-        async put(serviceName, path, body, userId = undefined) {
+        async put(serviceName, path, query = {}, body, userId = undefined) {
             if (userId) query['internalUserId'] = userId;
             let url = `http://${
                 process.env[serviceName.toUpperCase() + '_SERVICE_SERVICE_HOST']
@@ -49,7 +49,7 @@ module.exports = {
                 body: JSON.stringify(body),
             });
         },
-        async delete(serviceName, path, body, userId = undefined) {
+        async delete(serviceName, path, query = {}, body, userId = undefined) {
             if (userId) query['internalUserId'] = userId;
             let url = `http://${
                 process.env[serviceName.toUpperCase() + '_SERVICE_SERVICE_HOST']
