@@ -11,7 +11,7 @@ module.exports = {
                 'INTEREST_GROUP',
                 'subscribe',
                 {},
-                warningId,
+                { warningId },
                 userId
             );
         },
@@ -19,8 +19,8 @@ module.exports = {
         async unsubscribe({ warningId, userId }) {
             return await services.fetch.delete(
                 'INTEREST_GROUP',
-                'subscribe',
-                warningId,
+                'unsubscribe',
+                { warningId },
                 userId
             );
         },
