@@ -126,4 +126,21 @@ module.exports = {
             );
         },
     },
+    statistics: {
+        async distribution(query) {
+            return await services.fetch.get(
+                'warning',
+                'statistics/distribution',
+                query
+            );
+        },
+
+        async count(query) {
+            return await services.fetch.get(
+                'warning',
+                'statistics/count',
+                query
+            );
+        },
+    },
 };

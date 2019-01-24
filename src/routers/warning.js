@@ -117,4 +117,14 @@ router.post('/comment', isAuth, upload.single('image'), async (req, res) => {
     await res.send(await r.json(), r.status);
 });
 
+router.get('/statistics/distribution', async (req, res) => {
+    const r = await WarningService.statistics.distribution(req.query);
+    await res.send(await r.json(), r.status);
+});
+
+router.get('/statistics/count', async (req, res) => {
+    const r = await WarningService.statistics.count(req.query);
+    await res.send(await r.json(), r.status);
+});
+
 module.exports = router;
