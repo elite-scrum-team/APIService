@@ -96,24 +96,22 @@ router.get('/content/:id', async (req, res) => {
     await res.send(await result.json(), result.status);
 });
 // update a event
-router.put('/:id', isAuth, async (req, res) => {
+router.put('/:id', async (req, res) => {
+    const response = await userService.getUserData(req.userId);
+    if (response.isError) res.status(500).send({ error: 'server error' });
+    const user = await response.json();
+    const resp = await MapService.location.retrieveInfo(req.body.location);
+    if (resp.isError) res.status(500).send({ error: 'server error' });
+    const munici = await resp.json();
+    const conf = user.group
+        .filter(e => e)
+        .find(e => e.municipalitiy === munici.municipalityId);
+
     try {
-        const response = await userService.getUserData(req.userId);
-        if (response.isError) res.status(500).send({ error: 'server error' });
-        const user = await response.json();
-
-        const resp = await MapService.location.retrieveInfo(req.body.location);
-
-        if (resp.isError) res.status(500).send({ error: 'server error' });
-
-        const munici = await resp.json();
-        const conf = user.group
-            .filter(e => e)
-            .find(e => e.municipalitiy === munici.municipalityId);
-
         if (conf) {
             const body = req.body;
             const eventId = req.params.id;
+            delete body['image'];
 
             const promise1 = await EventService.event.update(eventId, body);
             await res.send(await promise1.json(), promise1.status);
@@ -123,7 +121,7 @@ router.put('/:id', isAuth, async (req, res) => {
             });
         }
     } catch (error) {
-        res.send({ error: error });
+        res.status(500).send({ error: 'catched an error in event' });
     }
 });
 

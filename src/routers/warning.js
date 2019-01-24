@@ -4,6 +4,7 @@ const isAuth = require('../middleware/isAuth');
 
 const WarningService = require('../services/WarningService');
 const MapService = require('../services/MapService');
+const UserService = require('../services/UserService');
 
 const router = express.Router();
 
@@ -89,6 +90,9 @@ router.get('/close/:lat/:lng', async (req, res) => {
 
 // create warning
 router.post('/', isAuth, async (req, res) => {
+    const user = await UserService.getUserData(req.userId);
+    if (user.isError || user.points) await res.send(500);
+
     const r = await WarningService.warning.create(req.body, req.userId);
     await res.send(await r.json(), r.status);
 });
@@ -116,5 +120,7 @@ router.post('/comment', isAuth, upload.single('image'), async (req, res) => {
     );
     await res.send(await r.json(), r.status);
 });
+
+router.get('/score/:id', isAuth, async (req, res) => {});
 
 module.exports = router;

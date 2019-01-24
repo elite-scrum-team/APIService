@@ -20,7 +20,7 @@ module.exports = {
         },
 
         async update(id, event) {
-            return await services.fetch.put('event', `event/${id}`, event);
+            return await services.fetch.put('event', `event/${id}`, {}, event);
         },
 
         async retrieve(filters, userId) {
