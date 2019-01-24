@@ -89,9 +89,15 @@ router.get('/close/:lat/:lng', async (req, res) => {
 });
 
 // create warning
-router.post('/', isAuth, async (req, res) => {
+router.post('/', async (req, res) => {
     const user = await UserService.getUserData(req.userId);
     if (user.isError || user.points) await res.send(500);
+    const response = await WarningService.score.getScore(req.userId);
+    const score = await response.json();
+
+    if (response.isError || score.score < -100) {
+        await res.status(403).send({ message: 'your score is to low!' });
+    }
 
     const r = await WarningService.warning.create(req.body, req.userId);
     await res.send(await r.json(), r.status);
@@ -130,6 +136,5 @@ router.get('/statistics/count', async (req, res) => {
     const r = await WarningService.statistics.count(req.query);
     await res.send(await r.json(), r.status);
 });
-router.get('/score/:id', isAuth, async (req, res) => {});
 
 module.exports = router;

@@ -1,7 +1,7 @@
 const services = require('../util/service.js');
 
 if (!process.env.WARNING_SERVICE_SERVICE_HOST) {
-    process.env['WARNING_SERVICE_SERVICE_HOST'] = '35.228.119.12';
+    process.env['WARNING_SERVICE_SERVICE_HOST'] = '35.228.234.29';
 }
 
 module.exports = {
@@ -141,6 +141,11 @@ module.exports = {
                 'statistics/count',
                 query
             );
+        },
+    },
+    score: {
+        async getScore(userId) {
+            return await services.fetch.get('warning', 'score', {}, userId);
         },
     },
 };
