@@ -1,9 +1,5 @@
 const services = require('../util/service.js');
 
-if (!process.env.INTEREST_GROUP_SERVICE_SERVICE_HOST) {
-    process.env['INTEREST_GROUP_SERVICE_SERVICE_HOST'] = '10.35.243.198';
-}
-
 module.exports = {
     warning: {
         async subscribe({ warningId, userId }) {
