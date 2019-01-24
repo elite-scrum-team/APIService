@@ -1,7 +1,7 @@
 const services = require('../util/service.js');
 
 if (!process.env.WARNING_SERVICE_SERVICE_HOST) {
-    process.env['WARNING_SERVICE_SERVICE_HOST'] = '35.228.234.29';
+    process.env['WARNING_SERVICE_SERVICE_HOST'] = '10.35.250.202';
 }
 
 module.exports = {

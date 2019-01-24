@@ -3,7 +3,7 @@ const services = require('../util/service.js');
 console.log(`map-service: ${process.env.MAP_SERVICE_SERVICE_HOST}`);
 
 if (!process.env.MAP_SERVICE_SERVICE_HOST) {
-    process.env['MAP_SERVICE_SERVICE_HOST'] = '35.228.90.135';
+    process.env['MAP_SERVICE_SERVICE_HOST'] = '10.35.241.33';
 }
 
 module.exports = {
