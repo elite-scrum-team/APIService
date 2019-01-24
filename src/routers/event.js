@@ -96,7 +96,7 @@ router.get('/content/:id', async (req, res) => {
     await res.send(await result.json(), result.status);
 });
 // update a event
-router.put('/:id', async (req, res) => {
+router.put('/:id', isAuth ,async (req, res) => {
     const response = await userService.getUserData(req.userId);
     if (response.isError) res.status(500).send({ error: 'server error' });
     const user = await response.json();
